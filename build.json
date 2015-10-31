@@ -1,0 +1,13 @@
+[
+  "./node_modules/component-extensions/dist/component.extensions.js",
+  "./node_modules/Object.observe/dist/Object.observe.js",
+  "./node_modules/nested-observe/dist/nested-observe.js",
+  "./node_modules/observe-js/src/observe.js",
+  "./node_modules/node-bind/src/NodeBind.js",
+  "./lib/report.js",
+  "./lib/component.observe-js.js",
+  "./lib/prototype.cache.js",
+  "./lib/prototype.pubsub.js",
+  "./lib/prototype.scope.js",
+  "./lib/prototype.template.js"
+]
