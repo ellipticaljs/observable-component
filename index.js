@@ -1,13 +1,13 @@
 
 
 
-module.exports.component=require('component-extensions');
-module.exports.observe=require('Object.observe');
-module.exports.nestedObserve=require('nested-observe');
-module.exports.event=require('elliptical-event');
-module.exports.observeJs=require('observe-js');
-module.exports.nodeBind=require('NodeBind');
-module.exports.observable={
+require('component-extensions');
+require('Object.observe');
+require('nested-observe');
+require('elliptical-event');
+require('observe-js');
+require('NodeBind');
+module.exports={
     observeJs:require('./lib/component.observe-js'),
     cache:require('./lib/prototype.cache'),
     pubsub:require('./lib/prototype.pubsub'),
