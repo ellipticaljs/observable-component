@@ -2422,8 +2422,8 @@
         define([], factory);
     } else {
         // Browser globals (root is window)
-        root.elliptical=root.elliptical || {};
-        root.elliptical.extensions=root.elliptical.extensions || {};
+        root.elliptical = root.elliptical || {};
+        root.elliptical.extensions = root.elliptical.extensions || {};
         root.elliptical.extensions.utils = factory();
         root.returnExports = root.elliptical.extensions.utils;
     }
@@ -2431,7 +2431,7 @@
 
     return {
 
-        _utils:$.utils,
+        _utils: $.utils,
 
         _DOMParser: function (htmlString) {
             return new DOMParser().parseFromString(htmlString, 'text/html');
@@ -2570,6 +2570,19 @@
                     callback();
                 }
             });
+        },
+
+        _jsonParseMessage: function (obj) {
+            try {
+                var msgObj = JSON.parse(obj);
+                if (msgObj.message) {
+                    return msgObj.message;
+                } else {
+                    return obj;
+                }
+            } catch (ex) {
+                return obj;
+            }
         }
 
 
