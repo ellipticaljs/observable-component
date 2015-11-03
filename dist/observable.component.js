@@ -2572,6 +2572,32 @@
             });
         },
 
+
+        _resetSemanticState:function(){
+            this.element.removeClass('error')
+                .removeClass('warning')
+                .removeClass('success')
+                .removeClass('info')
+        },
+
+        _setDisabledReadOnlyChildrenAttributes:function(){
+            var element=this.element;
+            if(element[0].hasAttribute && element[0].hasAttribute('disabled')){
+                element.query('input,textarea,select',function(result){
+                    if(result[0]){
+                        result.attr('disabled',true);
+                    }
+                });
+            }
+            if(element[0].hasAttribute && element[0].hasAttribute('readonly')){
+                element.query('input,textarea,select',function(result){
+                    if(result[0]){
+                        result.attr('readonly',true);
+                    }
+                });
+            }
+        },
+
         _jsonParseMessage: function (obj) {
             try {
                 var msgObj = JSON.parse(obj);
