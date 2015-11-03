@@ -7028,7 +7028,9 @@
 
         _dispose:function(){
             this._unbindSubscriptions();
-            this._super();
+            if(this._super){
+                this._super();
+            }
         }
 
 
@@ -7292,7 +7294,7 @@
             var scopeBind=(this.options) ? this.options.scopeBind : this.scopeBind;
             if (scopeBind === undefined) scopeBind=true;
             if(scopeBind){
-                this.__watch();
+                this._watch();
             }
             this._setAutoRebind();
             this._initPathObservers();
@@ -7600,6 +7602,9 @@
         _dispose:function(){
             this._disconnectDOMObserver();
             this._disconnectPathObservers();
+            if(this._super){
+                this._super();
+            }
         },
 
         $rebind:function(){
