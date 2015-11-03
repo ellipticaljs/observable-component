@@ -2580,7 +2580,7 @@
                 .removeClass('info')
         },
 
-        _setDisabledReadOnlyChildrenAttributes:function(){
+        _setChildrenAttributes:function(){
             var element=this.element;
             if(element[0].hasAttribute && element[0].hasAttribute('disabled')){
                 element.query('input,textarea,select',function(result){
@@ -2596,6 +2596,24 @@
                     }
                 });
             }
+        },
+
+        _enableChildrenAttributes:function(){
+            var element=this.element;
+            element.query('input,textarea,select',function(result){
+                if(result[0]){
+                    result.attr('disabled',false);
+                }
+            });
+            element.query('input,textarea,select',function(result){
+                if(result[0]){
+                    result.attr('readonly',false);
+                }
+            });
+        },
+
+        _find:function(selector){
+            return this.element.find(selector);
         },
 
         _jsonParseMessage: function (obj) {
