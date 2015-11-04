@@ -9,6 +9,7 @@
     "url": "https://github.com/tachyon1337/observable-component.git"
   },
   "dependencies":{
+    "elliptical-utils": "git+https://github.com/tachyon1337/elliptical-utils.git",
     "elliptical-event": "git+https://github.com/tachyon1337/elliptical-event.git",
     "component-extensions": "git+https://github.com/tachyon1337/component-extensions.git",
     "Object.observe": "git+https://github.com/tachyon1337/Object.observe.git",
