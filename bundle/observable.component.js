@@ -7021,7 +7021,8 @@
          */
         _unbindSubscriptions:function(){
             var subscriptions=this._data.get('subscriptions');
-            for (var [channel, fn] of subscriptions) {
+            for (var channel of subscriptions) {
+                var fn=subscriptions.get(channel);
                 Event.off(channel,fn);
             }
         },
