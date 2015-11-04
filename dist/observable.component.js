@@ -9154,7 +9154,7 @@
                         if(templateNode){
                             clearInterval(intervalId);
                             self._data.set('templateNode',templateNode);
-                            self._setTemplateId();
+                            self._setTemplateId(templateNode);
                             self.__render();
                         }else{
                             if(count > INTERVAL_COUNT){
