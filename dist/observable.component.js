@@ -5096,7 +5096,7 @@
 }(this, function (utils,root,element,dataStore,device,template,transition,transform,util,event) {
 
     var base={};
-    Object.assign({},element,dataStore,util,device,template,transition,transform,event);
+    Object.assign(base,element,dataStore,util,device,template,transition,transform,event);
     return base;
 
 }));
