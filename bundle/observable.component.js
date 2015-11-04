@@ -7280,7 +7280,7 @@
     } else {
         // Browser globals (root is window)
         root.elliptical.observable=root.elliptical.observable || {};
-        root.elliptical.observable.scope = factory(root.elliptical.utils,root.elliptical.observable.report);
+        root.elliptical.observable.template = factory(root.elliptical.utils,root.elliptical.observable.report);
         root.returnExports = root.elliptical.observable.template;
     }
 }(this, function (utils,report) {
