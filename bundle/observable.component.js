@@ -5088,7 +5088,7 @@
             './prototype.template','./prototype.transition','./prototype.transform','./prototype.utils','./prototype.event'], factory);
     } else {
         // Browser globals (root is window)
-        var e=root.elliptical.prototype.extensions;
+        var e=root.elliptical.extensions;
         root.elliptical.extensions.base = factory(root.elliptical.utils,root,e.element,e.dataStore,e.device,
             e.template,e.transition,e.transform,e.utils,e.event);
         root.returnExports = root.elliptical.extensions.base;
