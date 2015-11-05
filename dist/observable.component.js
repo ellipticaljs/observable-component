@@ -3486,32 +3486,6 @@
         define([], factory);
     } else {
         // Browser globals (root is window)
-        root.elliptical=root.elliptical || {};
-        root.elliptical.extensions=root.elliptical.extensions || {};
-        root.elliptical.extensions.element = factory();
-        root.returnExports = root.elliptical.extensions.element;
-    }
-}(this, function () {
-
-    return {
-        created:function(){
-            this.element=$(this);
-        }
-
-    };
-}));
-
-//umd pattern
-
-(function (root, factory) {
-    if (typeof module !== 'undefined' && module.exports) {
-        //commonjs
-        module.exports = factory();
-    } else if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define([], factory);
-    } else {
-        // Browser globals (root is window)
         root.elliptical = root.elliptical || {};
         root.elliptical.extensions = root.elliptical.extensions || {};
         root.elliptical.extensions.utils = factory();
@@ -3720,44 +3694,6 @@
         }
 
 
-    };
-}));
-
-//umd pattern
-
-(function (root, factory) {
-    if (typeof module !== 'undefined' && module.exports) {
-        //commonjs
-        module.exports = factory();
-    } else if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define([], factory);
-    } else {
-        // Browser globals (root is window)
-        root.elliptical=root.elliptical || {};
-        root.elliptical.extensions=root.elliptical.extensions || {};
-        root.elliptical.extensions.dataStore = factory();
-        root.returnExports = root.elliptical.extensions.dataStore;
-    }
-}(this, function () {
-
-    return {
-        _data:{
-            _store:{},
-            get:function(prop){
-                if(this._store){
-                    return this._store[prop];
-                }
-
-            },
-            set:function(prop,val){
-                if(this._store){
-                    this._store[prop]=val;
-                }
-            },
-            click:'touchclick',
-            hover:'touchhover'
-        }
     };
 }));
 //umd pattern
@@ -5087,24 +5023,23 @@
 (function (root, factory) {
     if (typeof module !== 'undefined' && module.exports) {
         //commonjs
-        module.exports = factory(require('elliptical-utils'),require('jquery-extensions'),require('./element'),
-            require('./dataStore'),require('./device'), require('./template'),
+        module.exports = factory(require('elliptical-utils'),require('jquery-extensions'),require('./device'), require('./template'),
             require('./transition'), require('./transform'),require('./utils'),require('./event'));
     } else if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define(['elliptical-utils','jquery-extensions','./prototype.element','./prototype.dataStore','./prototype.device',
+        define(['elliptical-utils','jquery-extensions','./prototype.device',
             './prototype.template','./prototype.transition','./prototype.transform','./prototype.utils','./prototype.event'], factory);
     } else {
         // Browser globals (root is window)
         var e=root.elliptical.extensions;
-        root.elliptical.extensions.base = factory(root.elliptical.utils,root,e.element,e.dataStore,e.device,
+        root.elliptical.extensions.base = factory(root.elliptical.utils,e.device,
             e.template,e.transition,e.transform,e.utils,e.event);
         root.returnExports = root.elliptical.extensions.base;
     }
-}(this, function (utils,root,element,dataStore,device,template,transition,transform,util,event) {
+}(this, function (utils,root,device,template,transition,transform,util,event) {
 
     var base={};
-    Object.assign(base,element,dataStore,util,device,template,transition,transform,event);
+    Object.assign(base,util,device,template,transition,transform,event);
     return base;
 
 }));
