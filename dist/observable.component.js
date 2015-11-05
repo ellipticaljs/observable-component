@@ -8920,7 +8920,7 @@
             var count=0;
             var timeoutId=setInterval(function(){
                 self._data.set('scopeTimeoutId',timeoutId);
-                var isEmpty=object.isEmpty(this.$scope);
+                var isEmpty=object.isEmpty(self.$scope);
                 if(!isEmpty){
                     clearInterval(timeoutId);
                     self._setObservable();
@@ -9115,6 +9115,7 @@
     var INTERVAL_DELAY=500;
     var random=utils.random;
     var object=utils.object;
+    var string=utils.string;
 
     return {
 
@@ -9199,7 +9200,11 @@
         _getTemplateId:function(){
             var node=this._getTemplateNode();
             if(node){
-                return node.getAttribute('template-id');
+                var attr=node.getAttribute('template');
+                if(attr==='') return null;
+                else{
+                    return attr;
+                }
             }else{
                 return null;
             }
@@ -9216,9 +9221,10 @@
         },
 
         _setTemplateId:function(node){
-            var id='template-' + random.str(6);
-            node.setAttribute('template-id',id);
+            var id='tmpl-' + random.str(6);
+            node.setAttribute('template',id);
             this._data.set('templateId',id);
+            return id;
         },
 
         _setVisibility:function(){
@@ -9256,7 +9262,7 @@
             var twoWayBind=(this.options) ? this.options.twoWayBind : this.twoWayBind;
             if(twoWayBind===undefined) twoWayBind=true;
             var templateNode=this._data.get('templateNode');
-            var templateId=this._data.get('templateNode');
+            var templateId=this._data.get('templateId');
             this._render(templateNode,templateId,this.$scope,function(err,out){
                 if(twoWayBind){
                    self.__dataBind(templateNode);
