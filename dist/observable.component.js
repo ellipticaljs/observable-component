@@ -4957,7 +4957,14 @@
             this.__precompile(html,templateId);
         },
 
+        _verifyTemplateExists:function(templateId){
+            if(dust.cache[templateId]===undefined){
+                console.log('warning: template ' + templateId + ' does not exist');
+            }
+        },
+
         _render:function(node,templateId,context,callback){
+            this._verifyTemplateExists(templateId);
             dust.render(templateId, context, function (err, out) {
                 if(out){
                     node.innerHTML=out;
@@ -4969,6 +4976,7 @@
         },
 
         _renderTemplate:function(templateId,context,callback){
+            this._verifyTemplateExists(templateId);
             dust.render(templateId, context, callback);
         },
 
@@ -8227,7 +8235,7 @@
          */
         bracketPathFormat:function(path){
             var arr=this.splitPath(path);
-            var num=this.isNumeric;
+            var num=utils.isNumeric;
             if(arr && arr.length){
                 var mapped=arr.map(function(v){
                     return (num(v)) ? '['+ v.toString() + ']' : v;
@@ -9148,13 +9156,15 @@
                     var templateId=self._getTemplateId();
                     if(templateId){
                         self._data.set('templateId',templateId);
+                        clearInterval(intervalId);
                         self.__render();
                     }else{
                         var templateNode=self._getTemplateNode();
                         if(templateNode){
                             clearInterval(intervalId);
                             self._data.set('templateNode',templateNode);
-                            self._setTemplateId(templateNode);
+                            templateId=self._setTemplateId(templateNode);
+                            self._precompileTemplate(templateNode,templateId);
                             self.__render();
                         }else{
                             if(count > INTERVAL_COUNT){
@@ -9294,9 +9304,8 @@
                     //update the path value of scope
                     utils.setObjValueByPath(self.$scope,path,value);
                 }
-
                 var text=this.__createTextNode(node,value);
-                //path=report.bracketPathFormat(path);
+                path=report.bracketPathFormat(path);
                 var observer = new PathObserver(self.$scope, path);
                 text.bind('textContent', observer);
 
@@ -9305,6 +9314,7 @@
             };
 
             var bindAttributeObserver =function(node,tuple){
+                var fn={};
                 var attr=tuple[0];
                 if(tuple.length > 2){
                     fn=parseFunction(tuple[2]);
@@ -9318,8 +9328,7 @@
                     //update the path value of scope
                     utils.setObjValueByPath(self.$scope,path,value);
                 }
-
-                //path=report.bracketPathFormat(path);
+                path=report.bracketPathFormat(path);
                 var observer = new PathObserver(self.$scope, path);
                 node.bind(attr, observer);
 
@@ -9401,6 +9410,7 @@
         },
 
         __onScopeChange: function(result){
+            if(!this._passScopeFilter(result)) return;
             var autoRebind=this._data.get('autoRebind');
             if(autoRebind){
                 if(result.removed && result.removed.length && result.removed.length > 0) {
@@ -9411,6 +9421,24 @@
             }
 
             this._onScopeChange(result);
+        },
+
+        _passScopeFilter:function(result){
+            if(result.changed.length > 0){
+                return this._filterScopeChange(result.changed);
+            }else if(result.added >0){
+                return this._filterScopeChange(result.added);
+            }else if(result.removed.length > 0){
+                return this._filterScopeChange(result.removed);
+            }
+        },
+
+        _filterScopeChange:function(arr){
+            var bool=false;
+            arr.forEach(function(record){
+                if(string.firstChar(record.name)!=='$') bool=true;
+            });
+            return bool;
         },
 
         _rebind:function(){
