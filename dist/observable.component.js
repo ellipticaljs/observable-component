@@ -4902,7 +4902,7 @@
         _render:function(node,templateId,context,callback){
             this._verifyTemplateExists(templateId);
             dust.render(templateId, context, function (err, out) {
-                if(out){
+                if(out || out===""){
                     node.innerHTML=out;
                 }
                 if (callback) {
