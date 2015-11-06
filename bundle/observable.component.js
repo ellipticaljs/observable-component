@@ -9341,9 +9341,13 @@
         },
 
         __createTextNode: function(node,value){
-            var text=node.innerText;
-            text=text.replace(value,'');
-            node.innerText=text;
+            var $node=$(node);
+            var text=$node.text();
+            if(text)  text=text.replace(value,'');
+            else{
+                text=value;
+            }
+            $node.text(text);
             var textNode=document.createTextNode(value);
             node.appendChild(textNode);
 
