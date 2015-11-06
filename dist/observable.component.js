@@ -8828,9 +8828,11 @@
             this._data.set('scopeObserver',null);
             this._data.set('scopeId',this.options.idProp);
             this.__initScope();
-
-            if(scopeBind){
-                this.__initScopeObservable();
+            if(this.__bindByDataAttribute()) this._setObservable();
+            else{
+                if(scopeBind){
+                    this.__initScopeObservable();
+                }
             }
         },
 
@@ -8869,13 +8871,24 @@
             },300);
         },
 
-
+        __bindByDataAttribute:function(){
+            var data=(this.options) ? this.options.data : this.data;
+            if(data===undefined)return false;
+            data=JSON.parse(data);
+            var scope=(this.options) ? this.options.scope : this.scope;
+            if(scope) this.$scope[scope]=data;
+            else{
+                this.$scope=data;
+            }
+            return true;
+        },
 
         /**
          * set the observable
          * @private
          */
         _setObservable:function(){
+            if(this._data.get('scopeObserver')) return;
             var $scope = this.$scope;
             var self=this;
             var observer = new ObjectObserver($scope,true);
@@ -9024,7 +9037,8 @@
             return report.objChangedProps(n,o);
         },
 
-        $setScope: function(){
+        $setScope: function(val){
+            if(val!==undefined) this.$scope=val;
             this._setObservable();
             this._onScopeBind();
         }
@@ -9245,7 +9259,7 @@
                     //update the path value of scope
                     utils.setObjValueByPath(self.$scope,path,value);
                 }
-                var text=this.__createTextNode(node,value);
+                var text=self.__createTextNode(node,value);
                 path=report.bracketPathFormat(path);
                 var observer = new PathObserver(self.$scope, path);
                 text.bind('textContent', observer);
