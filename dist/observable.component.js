@@ -8251,6 +8251,11 @@
             }
         },
 
+        /**
+         *
+         * @param obj
+         * @returns {Array}
+         */
         keys:function(obj){
             var keys=[];
             for(var prop in obj){
@@ -8261,6 +8266,11 @@
             return keys;
         },
 
+        /**
+         *
+         * @param obj
+         * @returns {*}
+         */
         isArrayList: function (obj) {
             if (Array.isArray(obj)) {
                 return obj;
@@ -8277,6 +8287,11 @@
 
         },
 
+        /**
+         *
+         * @param p
+         * @returns {void|string|*|Chartist.Svg|XML}
+         */
         pathReplace:function(p){
             var n= p.replace(/\//g,'.');
             if(string.firstChar(n)==='.'){
@@ -8285,6 +8300,12 @@
             return n;
         },
 
+        /**
+         *
+         * @param obj
+         * @param changeRecords
+         * @returns {*}
+         */
         objDiffReport:function(obj,changeRecords){
             var result=this.changeRecord.result;
             var self=this;
@@ -8691,11 +8712,19 @@
 }(this, function () {
 
     return {
+        /**
+         *
+         * @private
+         */
         _initCache:function(){
             var $cache=this.$cache();
             this._data.set('$cache',$cache);
         },
 
+        /**
+         *
+         * @returns {{reset: Function, set: Function, get: Function}}
+         */
         $cache:function(){
             var cache={};
             var count=1;
@@ -8718,6 +8747,10 @@
             }
         },
 
+        /**
+         *
+         * @private
+         */
         _dispose:function(){
             var $cache=this._data.get('$cache');
             $cache=null;
@@ -8789,6 +8822,10 @@
             });
         },
 
+        /**
+         *
+         * @private
+         */
         _dispose:function(){
             this._unbindSubscriptions();
             if(this._super){
@@ -8821,6 +8858,10 @@
 
     return {
 
+        /**
+         *
+         * @private
+         */
         _initScopeElement:function(){
             var scopeBind=(this.options) ? this.options.scopeBind : this.scopeBind;
             if(scopeBind===undefined) scopeBind=true;
@@ -8871,6 +8912,11 @@
             },300);
         },
 
+        /**
+         *
+         * @returns {boolean}
+         * @private
+         */
         __bindByDataAttribute:function(){
             var data=(this.options) ? this.options.data : this.data;
             if(data===undefined)return false;
@@ -8989,8 +9035,16 @@
             }
         },
 
+        /**
+         *
+         * @private
+         */
         _onScopeChange: function (){},
 
+        /**
+         *
+         * @private
+         */
         _onScopeBind: function(){},
 
         /**
@@ -9037,6 +9091,10 @@
             return report.objChangedProps(n,o);
         },
 
+        /**
+         *
+         * @param val
+         */
         $setScope: function(val){
             if(val!==undefined) this.$scope=val;
             this._setObservable();
@@ -9068,6 +9126,10 @@
 
     return {
 
+        /**
+         *
+         * @private
+         */
         _initTemplateElement:function(){
             var scopeBind=(this.options) ? this.options.scopeBind : this.scopeBind;
             if (scopeBind === undefined) scopeBind=true;
@@ -9081,16 +9143,28 @@
 
         },
 
+        /**
+         *
+         * @private
+         */
         _setAutoRebind: function(){
             var autoRebind=(this.options) ? this.options.autoRebind : this.autoRebind;
             if (autoRebind === undefined) autoRebind=true;
             this._data.set('autoRebind',autoRebind);
         },
 
+        /**
+         *
+         * @private
+         */
         _initPathObservers:function(){
             this._data.set('pathObservers',[]);
         },
 
+        /**
+         *
+         * @private
+         */
         _disconnectPathObservers:function(){
             var pathObservers=this._data.get('pathObservers');
             pathObservers.forEach(function(observer){
@@ -9099,6 +9173,10 @@
             pathObservers=null;
         },
 
+        /**
+         *
+         * @private
+         */
         _watch:function(){
             var self=this;
             var intervalId=setInterval(function(){
@@ -9133,6 +9211,11 @@
 
         },
 
+        /**
+         *
+         * @returns {*}
+         * @private
+         */
         __isReady:function(){
             if(object.isEmpty(this.$scope)){
                 return false;
@@ -9141,11 +9224,20 @@
             }
         },
 
+        /**
+         *
+         * @returns {boolean}
+         * @private
+         */
         _isReady:function(){
             return true;
         },
 
-
+        /**
+         *
+         * @returns {*}
+         * @private
+         */
         _getTemplateId:function(){
             var node=this._getTemplateNode();
             if(node){
@@ -9159,6 +9251,11 @@
             }
         },
 
+        /**
+         *
+         * @returns {*}
+         * @private
+         */
         _getTemplateNode:function(){
             var element=this.element;
             var template=element.selfFind('[template]');
@@ -9169,6 +9266,12 @@
             }
         },
 
+        /**
+         *
+         * @param node
+         * @returns {string}
+         * @private
+         */
         _setTemplateId:function(node){
             var id='tmpl-' + random.str(6);
             node.setAttribute('template',id);
@@ -9176,6 +9279,10 @@
             return id;
         },
 
+        /**
+         *
+         * @private
+         */
         _setVisibility:function(){
             var templateNode=this._data.get('templateNode');
             if(templateNode){
@@ -9183,16 +9290,29 @@
             }
         },
 
+        /**
+         *
+         * @private
+         */
         _connectDOMObserver:function(){
             var templateNode=this._data.get('templateNode');
             $(templateNode).mutationSummary('connect', this.__onMutation.bind(this), [{ all: true }]);
         },
 
+        /**
+         *
+         * @private
+         */
         _disconnectDOMObserver:function(){
             var templateNode=this._data.get('templateNode');
             $(templateNode).mutationSummary('disconnect');
         },
 
+        /**
+         *
+         * @param summary
+         * @private
+         */
         __onMutation:function(summary){
             if(summary.added){
                 this._onMutationAdded(summary.added)
@@ -9202,10 +9322,24 @@
             }
         },
 
+        /**
+         *
+         * @param added
+         * @private
+         */
         _onMutationAdded:function(added){},
 
+        /**
+         *
+         * @param removed
+         * @private
+         */
         _onMutationRemoved:function(removed){},
 
+        /**
+         *
+         * @private
+         */
         __render:function(){
             var self=this;
             var twoWayBind=(this.options) ? this.options.twoWayBind : this.twoWayBind;
@@ -9221,6 +9355,11 @@
             });
         },
 
+        /**
+         *
+         * @param templateNode
+         * @private
+         */
         __dataBind:function(templateNode){
             var pathObservers=this._data.get('pathObservers');
             var self=this;
@@ -9354,6 +9493,13 @@
             }
         },
 
+        /**
+         *
+         * @param node
+         * @param value
+         * @returns {*|Text}
+         * @private
+         */
         __createTextNode: function(node,value){
             var $node=$(node);
             var text=$node.text();
@@ -9368,6 +9514,11 @@
             return textNode;
         },
 
+        /**
+         *
+         * @param result
+         * @private
+         */
         __onScopeChange: function(result){
             if(!this._passScopeFilter(result)) return;
             var autoRebind=this._data.get('autoRebind');
@@ -9382,6 +9533,12 @@
             this._onScopeChange(result);
         },
 
+        /**
+         *
+         * @param result
+         * @returns {*}
+         * @private
+         */
         _passScopeFilter:function(result){
             if(result.changed.length > 0){
                 return this._filterScopeChange(result.changed);
@@ -9392,6 +9549,12 @@
             }
         },
 
+        /**
+         *
+         * @param arr
+         * @returns {boolean}
+         * @private
+         */
         _filterScopeChange:function(arr){
             var bool=false;
             arr.forEach(function(record){
@@ -9400,12 +9563,20 @@
             return bool;
         },
 
+        /**
+         *
+         * @private
+         */
         _rebind:function(){
             this._dispose();
             this._initPathObservers();
             this.__render();
         },
 
+        /**
+         *
+         * @private
+         */
         _dispose:function(){
             this._disconnectDOMObserver();
             this._disconnectPathObservers();
@@ -9414,6 +9585,9 @@
             }
         },
 
+        /**
+         *
+         */
         $rebind:function(){
             this._rebind();
         }
