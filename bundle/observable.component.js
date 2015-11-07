@@ -8779,13 +8779,17 @@
             }
         },
 
+        _disposeCache:function(){
+            var $cache=this._data.get('$cache');
+            $cache=null;
+        },
+
         /**
          *
          * @private
          */
         _dispose:function(){
-            var $cache=this._data.get('$cache');
-            $cache=null;
+            this._disposeCache();
             if(this._super){
                 this._super();
             }
@@ -8854,12 +8858,16 @@
             });
         },
 
+        _disposePubSub:function(){
+            this._unbindSubscriptions();
+        },
+
         /**
          *
          * @private
          */
         _dispose:function(){
-            this._unbindSubscriptions();
+            this._disposePubSub();
             if(this._super){
                 this._super();
             }
@@ -9056,13 +9064,16 @@
             }
         },
 
+        _disposeScope:function(){
+            this.__destroyObservable();
+        },
 
         /**
          * destroy clean-up
          * @private
          */
         _dispose:function(){
-            this.__destroyObservable();
+            this._disposeScope();
             if(this._super){
                 this._super();
             }
@@ -9602,7 +9613,7 @@
          * @private
          */
         _rebind:function(){
-            this._dispose();
+            this._disposeTemplate();
             this._initPathObservers();
             this.__render();
         },
@@ -9611,9 +9622,13 @@
          *
          * @private
          */
-        _dispose:function(){
+        _disposeTemplate:function(){
             this._disconnectDOMObserver();
             this._disconnectPathObservers();
+        },
+
+        _dispose:function(){
+            this._disposeTemplate();
             if(this._super){
                 this._super();
             }
