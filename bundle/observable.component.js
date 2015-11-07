@@ -8993,7 +8993,7 @@
         __destroyObservable:function(){
             var scopeObserver=this._data.get('scopeObserver');
             if(scopeObserver){
-                scopeObserver.close();
+                scopeObserver.disconnect_();
                 scopeObserver=null;
                 this.$scope=null;
             }
@@ -9205,17 +9205,7 @@
             this._data.set('pathObservers',[]);
         },
 
-        /**
-         *
-         * @private
-         */
-        _disconnectPathObservers:function(){
-            var pathObservers=this._data.get('pathObservers');
-            pathObservers.forEach(function(observer){
-                observer.disconnect();
-            });
-            pathObservers=null;
-        },
+
 
         /**
          *
@@ -9342,15 +9332,6 @@
         _connectDOMObserver:function(){
             var templateNode=this._data.get('templateNode');
             $(templateNode).mutationSummary('connect', this.__onMutation.bind(this), [{ all: true }]);
-        },
-
-        /**
-         *
-         * @private
-         */
-        _disconnectDOMObserver:function(){
-            var templateNode=this._data.get('templateNode');
-            $(templateNode).mutationSummary('disconnect');
         },
 
         /**
@@ -9616,6 +9597,27 @@
             this._disposeTemplate();
             this._initPathObservers();
             this.__render();
+        },
+
+        /**
+         *
+         * @private
+         */
+        _disconnectDOMObserver:function(){
+            var templateNode=this._data.get('templateNode');
+            $(templateNode).mutationSummary('disconnect');
+        },
+
+        /**
+         *
+         * @private
+         */
+        _disconnectPathObservers:function(){
+            var pathObservers=this._data.get('pathObservers');
+            pathObservers.forEach(function(observer){
+                observer.disconnect_();
+            });
+            pathObservers=null;
         },
 
         /**
