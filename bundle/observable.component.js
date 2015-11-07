@@ -8896,10 +8896,11 @@
          */
         _initScopeElement:function(){
             var scopeBind=(this.options) ? this.options.scopeBind : this.scopeBind;
+            var idProp=(this.options) ? this.options.idProp : this.idProp;
             if(scopeBind===undefined) scopeBind=true;
             this._data.set('scopeTimeoutId',null);
             this._data.set('scopeObserver',null);
-            this._data.set('scopeId',this.options.idProp);
+            this._data.set('scopeId',idProp);
             this.__initScope();
             if(this.__bindByDataAttribute()) this._setObservable();
             else{
@@ -9210,6 +9211,7 @@
          * @private
          */
         _watch:function(){
+            var count=0;
             var self=this;
             var intervalId=setInterval(function(){
                 if(self.__isReady()){
