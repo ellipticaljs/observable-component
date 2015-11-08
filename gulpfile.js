@@ -10,8 +10,7 @@ var gulp=require('gulp'),
     JQ='./node_modules/component-extensions/dist/jquery.js',
     CSS ='./node_modules/component-extensions/css/styles.css',
     DUST='./node_modules/component-extensions/dist/dust.js',
-    CEXT='./node_modules/component-extensions/dist/component.extensions.js',
-    MS='./node_modules/component-extensions/dist/mutation-summary.js',
+    MS='./node_modules/jquery-mutation-summary/dist/mutation.summary.js',
     UTILS='./node_modules/component-extensions/dist/elliptical.utils.js',
     MOMENT='./node_modules/component-extensions/dist/moment.js',
     BUNDLE_JSON=require('./bundle.json'),
@@ -19,7 +18,7 @@ var gulp=require('gulp'),
 
 
 gulp.task('default',function(){
-    console.log(REPO_NAME + ' ..."tasks: gulp build|gulp minify|gulp bundle"');
+    console.log(REPO_NAME + ' ..."tasks: gulp build|minify|bundle"');
 });
 
 
@@ -27,31 +26,25 @@ gulp.task('build',function(){
     fileStream(BUNDLE_JSON,DIST);
     fileStream(JQ,DIST);
     fileStream(CSS,DIST);
-    concatStream(BUILD_NAME)
-        .pipe(gulp.dest(DIST));
+    concatFileStream(BUILD_JSON,DIST,BUILD_NAME);
 });
 
 gulp.task('minify',function(){
     fileStream(CSS,DIST);
     minFileStream(DUST,DIST,'dust.min.js');
-    minFileStream(MS,DIST,'mutation-summary.min.js');
+    minFileStream(MS,DIST,'mutation.summary.min.js');
     minFileStream(JQ,DIST,'jquery.min.js');
     minFileStream(UTILS,DIST,'elliptical.utils.min.js');
     minFileStream(MOMENT,DIST,'moment.min.js');
     BUNDLE_JSON=BUNDLE_JSON.concat(BUILD_JSON);
-    srcStream(BUNDLE_JSON);
-    concatStream(MIN_NAME)
-        .pipe(uglify())
-        .pipe(gulp.dest(DIST));
+    minFileStream(BUNDLE_JSON,DIST,MIN_NAME);
 });
 
 gulp.task('bundle',function(){
     fileStream(JQ,BUNDLE);
     fileStream(CSS,BUNDLE);
     BUNDLE_JSON=BUNDLE_JSON.concat(BUILD_JSON);
-    srcStream(BUNDLE_JSON);
-    concatStream(BUILD_NAME)
-        .pipe(gulp.dest(BUNDLE));
+    concatFileStream(BUNDLE_JSON,BUNDLE,BUILD_NAME);
 });
 
 

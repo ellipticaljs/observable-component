@@ -12,6 +12,7 @@
     "elliptical-utils": "git+https://github.com/tachyon1337/elliptical-utils.git",
     "elliptical-event": "git+https://github.com/tachyon1337/elliptical-event.git",
     "component-extensions": "git+https://github.com/tachyon1337/component-extensions.git",
+    "jquery-mutation-summary": "git+https://github.com/tachyon1337/jquery-mutation-summary.git",
     "Object.observe": "git+https://github.com/tachyon1337/Object.observe.git",
     "nested-observe": "git+https://github.com/tachyon1337/nested-observe.git",
     "observe-js":"git+https://github.com/Polymer/observe-js.git",
