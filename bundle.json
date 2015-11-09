@@ -1,8 +1,0 @@
-[
-    "./node_modules/component-extensions/dist/elliptical.utils.js",
-    "./node_modules/component-extensions/dist/jquery.js",
-    "./node_modules/jquery-mutation-summary/dist/mutation.summary.js",
-    "./node_modules/component-extensions/dist/moment.js",
-    "./node_modules/component-extensions/dist/dust.js",
-    "./node_modules/elliptical-event/dist/elliptical.event.js"
-]
