@@ -18,7 +18,7 @@ var gulp=require('gulp'),
 
 
 gulp.task('default',function(){
-    console.log(REPO_NAME + ' ..."tasks: gulp build|minify|bundle"');
+    console.log(REPO_NAME + ' ..."tasks: gulp build|minify"');
 });
 
 
@@ -39,12 +39,6 @@ gulp.task('minify',function(){
     minFileStream(BUILD_JSON,DIST,MIN_NAME);
 });
 
-gulp.task('bundle',function(){
-    fileStream(JQ,BUNDLE);
-    fileStream(CSS,BUNDLE);
-    BUNDLE_JSON=BUNDLE_JSON.concat(BUILD_JSON);
-    concatFileStream(BUNDLE_JSON,BUNDLE,BUILD_NAME);
-});
 
 
 function srcStream(src){

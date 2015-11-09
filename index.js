@@ -1,6 +1,3 @@
-
-
-
 require('component-extensions');
 require('jquery-mutation-summary');
 require('Object.observe');
