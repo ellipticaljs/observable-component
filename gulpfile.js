@@ -36,8 +36,7 @@ gulp.task('minify',function(){
     minFileStream(JQ,DIST,'jquery.min.js');
     minFileStream(UTILS,DIST,'elliptical.utils.min.js');
     minFileStream(MOMENT,DIST,'moment.min.js');
-    BUNDLE_JSON=BUNDLE_JSON.concat(BUILD_JSON);
-    minFileStream(BUNDLE_JSON,DIST,MIN_NAME);
+    minFileStream(BUILD_JSON,DIST,MIN_NAME);
 });
 
 gulp.task('bundle',function(){

@@ -1,5 +1,5 @@
 [
-  "./node_modules/component-extensions/dist/component.extensions.js",
+
   "./node_modules/Object.observe/dist/Object.observe.js",
   "./node_modules/nested-observe/dist/nested-observe.js",
   "./node_modules/observe-js/src/observe.js",

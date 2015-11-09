@@ -1,0 +1,26 @@
+{
+  "name": "observable-component",
+  "description": "An observable two-way data-binding platform for web components",
+  "version":"1.0.0",
+  "main": "dist/observable-component.js",
+  "authors": [
+    "S. Francis"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "two-way",
+    "data-binding",
+    "object.observe",
+    "web",
+    "components"
+  ],
+  "homepage": "https://github.com/tachyon1337/observable-component",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
