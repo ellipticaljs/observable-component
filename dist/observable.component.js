@@ -3846,7 +3846,16 @@
          * @private
          */
         __initScope:function(){
+            var self=this;
             this.$scope={};
+            var node=this.element[0];
+            //set public getter/setter $scope on the element instance
+            Object.defineProperty(node, '$scope', {
+                get: function() { return self.$scope; },
+                set: function(newValue) { self.$scope = newValue; },
+                enumerable: true,
+                configurable: true
+            });
         },
 
         /**
@@ -4489,7 +4498,7 @@
         _passScopeFilter:function(result){
             if(result.changed.length > 0){
                 return this._filterScopeChange(result.changed);
-            }else if(result.added >0){
+            }else if(result.added.length >0){
                 return this._filterScopeChange(result.added);
             }else if(result.removed.length > 0){
                 return this._filterScopeChange(result.removed);
