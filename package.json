@@ -1,7 +1,7 @@
 {
   "name": "observable-component",
   "description": "An observable two-way data-binding platform for web components",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "S. Francis",
   "license": "MIT",
   "repository": {
@@ -12,8 +12,6 @@
     "elliptical-utils": "git+https://github.com/tachyon1337/elliptical-utils.git",
     "elliptical-event": "git+https://github.com/tachyon1337/elliptical-event.git",
     "component-extensions": "git+https://github.com/tachyon1337/component-extensions.git",
-    "jquery-mutation-summary": "git+https://github.com/tachyon1337/jquery-mutation-summary.git",
-    "Object.observe": "git+https://github.com/tachyon1337/Object.observe.git",
     "nested-observe": "git+https://github.com/tachyon1337/nested-observe.git",
     "observe-js":"git+https://github.com/Polymer/observe-js.git",
     "NodeBind":"git+https://github.com/Polymer/NodeBind.git"

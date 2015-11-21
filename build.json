@@ -1,7 +1,5 @@
 [
 
-  "./node_modules/Object.observe/dist/Object.observe.js",
-  "./node_modules/nested-observe/dist/nested-observe.js",
   "./node_modules/observe-js/src/observe.js",
   "./node_modules/node-bind/src/NodeBind.js",
   "./lib/report.js",

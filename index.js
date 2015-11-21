@@ -1,6 +1,4 @@
 require('component-extensions');
-require('jquery-mutation-summary');
-require('Object.observe');
 require('nested-observe');
 require('elliptical-event');
 require('observe-js');
