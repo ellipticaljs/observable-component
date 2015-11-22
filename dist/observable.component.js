@@ -2887,6 +2887,7 @@
             var self=this;
             this.$scope={};
             var node=this.element[0];
+            if(this===node) return;
             //set public getter/setter $scope on the element instance
             Object.defineProperty(node, '$scope', {
                 get: function() { return self.$scope; },
