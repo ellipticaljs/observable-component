@@ -2090,9 +2090,9 @@
          * converts a delimited path into an array of props
          * 'items.0.FirstName' --> [items,0,FirstName]
          *
-         * @param path {String}
-         * @param separator {String}
-         * @returns {Array}
+         * @param {string} path
+         * @param {string} separator
+         * @returns {array}
          */
         splitPath:function(path,separator){
             if (typeof separator == 'undefined') {
@@ -2133,9 +2133,9 @@
 
         /**
          * sets the value of an object path
-         * @param obj {Object}
-         * @param path {String}
-         * @param value {Object}
+         * @param {object} obj
+         * @param {string} path
+         * @param {object} value
          */
         setObjValueByPath:function(obj,path,value){
             try{
@@ -2158,8 +2158,8 @@
 
         /**
          * maps dot normalized path a.i.b to bracket format: a[i]b
-         * @param path {String}
-         * @returns {String}
+         * @param {string} path
+         * @returns {string}
          */
         bracketPathFormat:function(path){
             var arr=this.splitPath(path);
@@ -2178,9 +2178,9 @@
 
         /**
          * returns an object of changed props when comparing new object with old object
-         * @param n {Object}
-         * @param o {Object}
-         * @returns {Object}
+         * @param {object} n
+         * @param {object} o
+         * @returns {object}
          */
         objChangedProps:function(n,o){
             var obj={};
@@ -2195,8 +2195,8 @@
 
         /**
          *
-         * @param obj
-         * @param index
+         * @param {object} obj
+         * @param {number} index
          * @returns {boolean}
          */
         isPropertyArray:function(obj,index){
@@ -2210,9 +2210,9 @@
 
         /**
          * gets the value of an object prop by index
-         * @param obj {Object}
-         * @param index {Number}
-         * @returns value
+         * @param {object} obj
+         * @param {number} index
+         * @returns {*} value
          */
         propertyByIndex:function(obj,index){
             return obj[Object.keys(obj)[index]];
@@ -2246,8 +2246,8 @@
 
         /**
          *
-         * @param obj
-         * @returns {Array}
+         * @param {object} obj
+         * @returns {array}
          */
         keys:function(obj){
             var keys=[];
@@ -2261,7 +2261,7 @@
 
         /**
          *
-         * @param obj
+         * @param {object} obj
          * @returns {*}
          */
         isArrayList: function (obj) {
@@ -2282,8 +2282,8 @@
 
         /**
          *
-         * @param p
-         * @returns {void|string|*|Chartist.Svg|XML}
+         * @param {string} p
+         * @returns {string}
          */
         pathReplace:function(p){
             var n= p.replace(/\//g,'.');
@@ -2294,9 +2294,9 @@
         },
 
         /**
-         *
-         * @param obj
-         * @param changeRecords
+         * object difference report
+         * @param {object} obj
+         * @param {array} changeRecords
          * @returns {*}
          */
         objDiffReport:function(obj,changeRecords){
@@ -2570,7 +2570,7 @@
      */
 
     /* overwrite the ObjectObserver Constructor
-     *  Note: if no id prop is passed to the constructor, the entire implementation defaults to the standard polymer one, including
+     *  Note: if no boolean override prop is passed to the constructor, the entire implementation defaults to the standard polymer one, including
      *  the change reporting
      * */
 
@@ -2982,7 +2982,7 @@
 
         /**
          * returns scope length...(-1)==object, not array
-         * @returns {Number}
+         * @returns {number}
          * @controller
          */
         __scopeLength:function(obj){
@@ -3009,7 +3009,7 @@
         /**
          * hook for scope observable change
          *
-         * @param result {Object}
+         * @param {array} result
          * @controller
          */
         __onScopeChange:function(result){
@@ -3019,8 +3019,8 @@
 
         /**
          * returns changed object properties from the result param in _onScopeChange
-         * @param obj
-         * @returns {Object}
+         * @param {object} obj
+         * @returns {object}
          * @private
          */
         _objectChange:function(obj){
@@ -3095,9 +3095,9 @@
 
         /**
          * gives the difference between two objects
-         * @param n {Object}
-         * @param o {Object}
-         * @returns {Object}
+         * @param {object} n
+         * @param {object} o
+         * @returns {object}
          * @public
          */
         _changeReport:function(n,o){
@@ -3106,7 +3106,7 @@
 
         /**
          *
-         * @param val
+         * @param {object} val
          */
         $setScope: function(val){
             if(val!==undefined) this.$scope=val;
@@ -3272,7 +3272,7 @@
 
         /**
          *
-         * @param node
+         * @param {object} node
          * @returns {string}
          * @private
          */
@@ -3305,7 +3305,7 @@
 
         /**
          *
-         * @param summary
+         * @param {object} summary
          * @private
          */
         __onMutation:function(summary){
@@ -3319,14 +3319,14 @@
 
         /**
          *
-         * @param added
+         * @param {array} added
          * @private
          */
         _onMutationAdded:function(added){},
 
         /**
          *
-         * @param removed
+         * @param {array} removed
          * @private
          */
         _onMutationRemoved:function(removed){},
@@ -3352,7 +3352,7 @@
 
         /**
          *
-         * @param templateNode
+         * @param {object} templateNode
          * @private
          */
         __dataBind:function(templateNode){
@@ -3475,8 +3475,8 @@
 
         /**
          * standard walk-the-dom recursion
-         * @param node {Element}
-         * @param func {Function}
+         * @param {object} node
+         * @param {function} func
          * @private
          */
         _traverseDOM:function(node,func){
@@ -3490,8 +3490,8 @@
 
         /**
          *
-         * @param node
-         * @param value
+         * @param {object} node
+         * @param {string} value
          * @returns {*|Text}
          * @private
          */
@@ -3511,7 +3511,7 @@
 
         /**
          *
-         * @param result
+         * @param {array} result
          * @private
          */
         __onScopeChange: function(result){
@@ -3530,7 +3530,7 @@
 
         /**
          *
-         * @param result
+         * @param {array} result
          * @returns {*}
          * @private
          */
@@ -3546,7 +3546,7 @@
 
         /**
          *
-         * @param arr
+         * @param {array} arr
          * @returns {boolean}
          * @private
          */
@@ -3598,6 +3598,10 @@
             this._disconnectPathObservers();
         },
 
+        /**
+         *
+         * @private
+         */
         _dispose:function(){
             this._disposeTemplate();
             if(this._super){
@@ -3606,7 +3610,7 @@
         },
 
         /**
-         *
+         *  @public
          */
         $rebind:function(){
             this._rebind();
