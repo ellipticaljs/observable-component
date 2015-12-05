@@ -3291,8 +3291,11 @@
             var templateNode=this._data.get('templateNode');
             if(templateNode){
                 templateNode.classList.add('visible');
+                this._onTemplateVisibility();
             }
         },
+
+        _onTemplateVisibility:function(){},
 
         /**
          *
