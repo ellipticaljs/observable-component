@@ -3291,11 +3291,11 @@
             var templateNode=this._data.get('templateNode');
             if(templateNode){
                 templateNode.classList.add('visible');
-                this._onTemplateVisibility();
+                this.__onTemplateVisibility();
             }
         },
 
-        _onTemplateVisibility:function(){},
+        __onTemplateVisibility:function(){},
 
         /**
          *
