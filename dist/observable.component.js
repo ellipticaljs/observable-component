@@ -2791,29 +2791,49 @@
         },
 
         /**
+         * get subscriptions Map
+         * @private
+         */
+        _getSubscriptions:function(){
+            var subscriptions=this._data.get('subscriptions');
+            if(!subscriptions){
+                subscriptions=new Map();
+            }
+            return subscriptions;
+        },
+
+        /**
          * subscribe to data/message over channel
          * @param {string} channel
          * @param {function} fn
          * @private
          */
         _subscribe:function(channel,fn){
-            var subscriptions=this._data.get('subscriptions');
-            if(!subscriptions){
-                subscriptions=new Map();
-            }
+            var subscriptions=this._getSubscriptions();
             subscriptions.set(channel,fn);
             this._data.set('subscriptions',subscriptions);
             Event.on(channel,fn);
         },
 
-        _subscriptions: $.noop,
+        _bindSubscriptions:function(){
+            var callbacks=this._subscriptions;
+            for(var prop in callbacks){
+                if(callbacks.hasOwnProperty(prop)){
+                    var channel=prop;
+                    var callback=callbacks[prop];
+                    this._subscribe(channel,this[callback].bind(this));
+                }
+            }
+        },
+
+        _subscriptions: {},
 
         /**
          * unbind subscriptions
          * @private
          */
         _unbindSubscriptions:function(){
-            var subscriptions=this._data.get('subscriptions');
+            var subscriptions=this._getSubscriptions();
             subscriptions.forEach(function(fn,channel){
                 Event.off(channel,fn);
             });
