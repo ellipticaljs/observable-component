@@ -2859,8 +2859,6 @@
 }));
 
 
-//umd pattern
-
 (function (root, factory) {
     if (typeof module !== 'undefined' && module.exports) {
         //commonjs
@@ -2885,11 +2883,9 @@
          */
         _initScopeElement:function(){
             var scopeBind=(this.options) ? this.options.scopeBind : this.scopeBind;
-            var idProp=(this.options) ? this.options.idProp : this.idProp;
             if(scopeBind===undefined) scopeBind=true;
             this._data.set('scopeTimeoutId',null);
             this._data.set('scopeObserver',null);
-            this._data.set('scopeId',idProp);
             this.__initScope();
             if(this.__bindByDataAttribute()) this._setObservable();
             else{
@@ -2945,9 +2941,8 @@
             data=JSON.parse(data);
             var scope=(this.options) ? this.options.scope : this.scope;
             if(scope) this.$scope[scope]=data;
-            else{
-                this.$scope=data;
-            }
+            else this.$scope=data;
+
             return true;
         },
 
@@ -3070,7 +3065,7 @@
          *
          * @private
          */
-        _onScopeBind: function(){},
+        __notify: function(){},
 
         /**
          * asynchronous $scope property setter for browsers that have polyfilled Object.observe
@@ -3110,19 +3105,14 @@
          * @returns {object}
          * @public
          */
-        _changeReport:function(n,o){
+        _changeReport:function(o,n){
             return report.objChangedProps(n,o);
         },
 
-        /**
-         *
-         * @param {object} val
-         */
-        $setScope: function(val){
-            if(val!==undefined) this.$scope=val;
-            this._setObservable();
-            this._onScopeBind();
+        changeReport:function(o,n){
+            return this._changeReport(o,n);
         }
+
     };
 }));
 //umd pattern
@@ -3539,6 +3529,7 @@
             }
 
             this._onScopeChange(result);
+            this.__notify(result);
         },
 
         /**
