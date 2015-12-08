@@ -1,7 +1,7 @@
 {
   "name": "observable-component",
   "description": "An observable two-way data-binding platform for web components",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "main": "dist/observable-component.js",
   "authors": [
     "S. Francis"
