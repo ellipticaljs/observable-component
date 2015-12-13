@@ -1,7 +1,7 @@
 {
   "name": "observable-component",
   "description": "An observable two-way data-binding platform for web components",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "main": "dist/observable-component.js",
   "authors": [
     "S. Francis"
@@ -43,6 +43,7 @@
   "dependencies": {
     "component-extensions": "~1.0.1",
     "elliptical-event": "~1.0.0",
-    "Nested.observe": "~0.1.7"
+    "Nested.observe": "~0.1.7",
+    "elliptical-dust-helpers": "~1.0.1"
   }
 }

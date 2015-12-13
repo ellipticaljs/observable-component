@@ -3120,17 +3120,17 @@
 (function (root, factory) {
     if (typeof module !== 'undefined' && module.exports) {
         //commonjs
-        module.exports = factory();
+        module.exports = factory(require('elliptical-utils'),require('dustjs'),require('./report'));
     } else if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define([], factory);
+        define(['elliptical-utils','dustjs','./report'], factory);
     } else {
         // Browser globals (root is window)
         root.elliptical.observable=root.elliptical.observable || {};
-        root.elliptical.observable.template = factory(root.elliptical.utils,root.elliptical.observable.report);
+        root.elliptical.observable.template = factory(root.elliptical.utils,dust,root.elliptical.observable.report);
         root.returnExports = root.elliptical.observable.template;
     }
-}(this, function (utils,report) {
+}(this, function (utils,dust,report) {
     var INTERVAL_COUNT=8;
     var INTERVAL_DELAY=500;
     var random=utils.random;
@@ -3570,6 +3570,50 @@
             this._disposeTemplate();
             this._initPathObservers();
             this.__render();
+        },
+
+        __precompile:function(template,id){
+            template = template.replace(/&quot;/g,'"');
+            var compiled=dust.compile(template,id);
+            dust.loadSource(compiled);
+        },
+
+        _precompileTemplate:function(node,templateId){
+            var html=node.innerHTML;
+            this.__precompile(html,templateId);
+        },
+
+        _verifyTemplateExists:function(templateId){
+            if(dust.cache[templateId]===undefined){
+                console.log('warning: template ' + templateId + ' does not exist');
+            }
+        },
+
+        _templateExists:function(templateId){
+            return (dust.cache[templateId]!==undefined);
+        },
+
+        _render:function(node,templateId,context,callback){
+            this._verifyTemplateExists(templateId);
+            dust.render(templateId, context, function (err, out) {
+                if(out || out===""){
+                    node.innerHTML=out;
+                }
+                if (callback) {
+                    callback(err, out);
+                }
+            });
+        },
+
+        _renderTemplate:function(templateId,context,callback){
+            this._verifyTemplateExists(templateId);
+            dust.render(templateId, context, callback);
+        },
+
+        _renderTemplateString:function(str,context,callback){
+            var id='template-' + random.str(6);
+            this.__precompile(str,id);
+            this._renderTemplate(id,context,callback);
         },
 
         /**

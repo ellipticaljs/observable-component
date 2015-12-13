@@ -1,7 +1,7 @@
 {
   "name": "observable-component",
   "description": "An observable two-way data-binding platform for web components",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "author": "S. Francis",
   "license": "MIT",
   "repository": {
@@ -12,6 +12,8 @@
     "elliptical-utils": "git+https://github.com/ellipticaljs/utils.git",
     "elliptical-event": "git+https://github.com/ellipticaljs/event.git",
     "component-extensions": "git+https://github.com/ellipticaljs/component-extensions.git",
+    "dustjs": "git+https://github.com/ellipticaljs/dustjs.git",
+    "elliptical-dust-helpers": "git+https://github.com/ellipticaljs/dust-helpers.git",
     "nested-observe": "git+https://github.com/ellipticaljs/nested-observe.git",
     "observe-js":"git+https://github.com/Polymer/observe-js.git",
     "NodeBind":"git+https://github.com/Polymer/NodeBind.git"
